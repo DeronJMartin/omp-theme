@@ -1,0 +1,127 @@
+version = 3
+final_space = true
+
+[transient_prompt]
+	background = 'transparent'
+	foreground = 'magenta'
+	template = ' '
+
+[secondary_prompt]
+	background = 'transparent'
+	foreground = 'green'
+	template = '{{if gt .Code 0}}<red>󰅂</>{{else}}<green>󰅂</>{{end}} '
+
+[[blocks]]
+	type = 'prompt'
+	alignment = 'left'
+
+	[[blocks.segments]]
+		type = 'os'
+		style = 'diamond'
+		trailing_diamond = ''
+		background = 'white'
+		foreground = 'black'
+		template = ' {{.Icon}} '
+	
+	[[blocks.segments]]
+		type = 'session'
+		style = 'diamond'
+		trailing_diamond = ''
+		background = 'lightMagenta'
+		foreground = 'transparent'
+		template = ' {{.UserName}} '
+
+	[[blocks.segments]]
+		type = 'path'
+		style = 'diamond'
+		trailing_diamond = ''
+		background = 'lightRed'
+		foreground = 'transparent'
+		template = ' {{.Path}} '
+
+		[blocks.segments.properties]
+		style = 'folder'
+
+	[[blocks.segments]]
+		type = 'git'
+		style = 'diamond'
+		trailing_diamond = ''
+		background = 'green'
+		background_templates = [
+			'{{ if or (.Working.Changed) (.Staging.Changed) }}yellow{{ end }}'
+		]
+		foreground = 'transparent'
+		template = ' {{ .HEAD }}{{ if .Staging.Changed }} {{ .Staging.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Working.Changed }} {{ .Working.String }}{{ end }} '
+
+		[blocks.segments.properties]
+			branch_ahead_icon = ''
+			branch_behind_icon = ''
+			branch_gone = '≢'
+			branch_icon = ' '
+			branch_identical_icon = '≡'
+			cherry_pick_icon = ' '
+			commit_icon = '▷ '
+			fetch_status = true
+			merge_icon = '◴ '
+			no_commits_icon = '[no commits]'
+			rebase_icon = 'Ɫ '
+			tag_icon = '▶ '
+
+[[blocks]]
+	type = 'prompt'
+	alignment = 'right'
+	overflow = 'hide'
+
+	[[blocks.segments]]
+		type = 'executiontime'
+		style = 'diamond'
+		leading_diamond = ''
+		background = 'white'
+		foreground = 'transparent'
+		template = ' {{.FormattedMs}} '
+
+		[blocks.segments.properties]
+			threshold = 500
+			style = 'austin'
+	
+	[[blocks.segments]]
+		type = 'owm'
+		style = 'diamond'
+		leading_diamond = ''
+		background = 'magenta'
+		foreground = 'transparent'
+		template = '{{ .Weather}} {{ .Temperature }}{{ .UnitIcon}} '
+
+		[blocks.segments.properties]
+#			api_key = ''
+#			location = ''
+			units = 'metric'
+			http_timeout = 10000
+
+	[[blocks.segments]]
+		type = 'python'
+		style = 'diamond'
+		leading_diamond = ''
+		background = 'blue'
+		foreground = 'yellow'
+		template = '  {{.Venv}}  {{.Major}}.{{.Minor}} '
+
+		[blocks.segments.properties]
+			folder_name_fallback = false
+	
+	
+[[blocks]]
+	type = 'prompt'
+	alignment = 'left'
+	newline = true
+
+	[[blocks.segments]]
+		type = 'status'
+		style = 'diamond'
+		trailing_diamond = ''
+		background = 'transparent'
+		foreground = 'green'
+		template = '{{if .Error}}<red></>{{else}}<green></>{{end}}'
+	
+		[blocks.segments.properties]
+			always_enabled = true
