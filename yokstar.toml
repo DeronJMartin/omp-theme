@@ -93,8 +93,8 @@ final_space = true
 		template = '{{ .Weather}} {{ .Temperature }}{{ .UnitIcon}} '
 
 		[blocks.segments.properties]
-#			api_key = ''
-#			location = ''
+			api_key = 'c4b68ffb88526c8959a1726fd3fd1428'
+			location = 'Gurgaon,IN'
 			units = 'metric'
 			http_timeout = 10000
 
